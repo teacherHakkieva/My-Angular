@@ -1,0 +1,72 @@
+<div class="box">
+
+    <section id="register-page">
+
+        <article class="register-page-container">
+            <form [formGroup]="form" class="register-page-form" (ngSubmit)="createHandler()">
+                <h2>Create Course</h2>
+
+                <label for="title">Title</label>
+                <input type="text" class="form-control" placeholder="Course name" formControlName="title" value="">
+               
+                <ng-container *ngIf="form.get('title')?.touched">
+                    <div class="error-box" *ngIf="form.get('title')?.errors?.['required']">
+                        <p>Course title is required </p>
+                    </div>
+                    <div class="error-box" *ngIf="form.get('title')?.errors?.['minlength']">
+                        <p>Course title must be at least 4 characters long </p>
+                    </div>
+                </ng-container>
+               
+                <label for="description">Description</label>
+                <input type="text" class="form-control" placeholder="Description" formControlName="description">
+               
+                <ng-container *ngIf="form.get('description')?.touched">
+                    <div class="error-box" *ngIf="form.get('description')?.errors?.['required']">
+                        <p>Course description is required </p>
+                    </div>
+                    <div class="error-box" *ngIf="form.get('description')?.errors?.['minlength']">
+                        <p>Course description must be at least 20 characters long </p>
+                    </div>
+                    <div class="error-box" *ngIf="form.get('description')?.errors?.['maxlength']">
+                        <p>Course description must be at most 50 characters long</p>
+                    </div>
+                </ng-container>
+               
+                <label for="imageUrl">Image url</label>
+                <input type="text" class="form-control" placeholder="Image Url" formControlName="imageUrl" value="">
+
+                <ng-container *ngIf="form.get('imageUrl')?.touched">
+                    <div class="error-box" *ngIf="form.get('imageUrl')?.errors?.['required']">
+                        <p>Course Url image is required </p>
+                    </div>
+                    <div class="error-box" *ngIf="form.get('imageUrl')?.errors?.['pattern']">
+                        <p>Invalid URL</p>
+                    </div>
+                </ng-container>
+               
+               
+
+                <label for="duration">Duration</label>
+                <input type="text" class="form-control" placeholder="4 weeks" formControlName="duration" value="">
+               
+                <ng-container *ngIf="form.get('duration')?.touched">
+                    <div class="error-box" *ngIf="form.get('duration')?.errors?.['required']">
+                        <p>Duration is required</p>
+                    </div>
+                   
+                </ng-container>
+               
+                <article class="register-page-button">
+                    <button class="btn-create">Create</button>
+                </article>
+
+
+
+            </form>
+
+
+        </article>
+
+    </section>
+</div>

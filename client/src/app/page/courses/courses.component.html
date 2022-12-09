@@ -1,0 +1,34 @@
+<section id="all-ads-page">
+    <article class="all-ads-title">
+        <h1>All courses</h1>
+    </article>
+
+    <!--If there are job ads in the database, show each one-->
+    <div *ngIf="!courses">
+        <article class="not-available-ads">
+            <h1>No courses...</h1>
+                   </article>
+    </div>
+
+    <article  *ngFor="let course of courses" class="all-ads-card">
+        <article class="all-ads-card-image">
+            <!-- Do not forget to change the path to the image -->
+            <img src="{{course?.imageUrl}}" alt="job-icon">
+        </article>
+
+        <article class="all-ads-card-content">
+            <!--You must put the headline value in <h2>-->
+            <h2>{{course.title}}</h2>
+            <h3>{{course.description}}</h3>
+            <article class="all-ads-card-content-item">
+                <p>{{course.duration}}</p>
+            </article>
+        </article>
+
+        <article class="all-ads-card-buttons">
+            <a routerLink='{{course._id}}' class="btn-details">Details</a>
+        </article>
+    </article>
+
+    
+</section>

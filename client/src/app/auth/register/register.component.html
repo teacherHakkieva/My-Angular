@@ -1,0 +1,64 @@
+
+<section id="register-page">
+    <div class="box">
+       
+    </div>
+    <article class="register-page-container">
+        <form [formGroup]="form" class="register-page-form" (ngSubmit)="registerHandler()">
+            <h2>Register</h2>
+            <p>Join us and find the perfect courses.</p>
+
+            <label for="username">Username:</label>
+            <input formControlName="username" type="text" id="username"  placeholder="Username" name="username">
+            
+            <ng-container *ngIf="form.get('username')?.touched" >
+                <div class="error-box" *ngIf="form.get('username')?.errors?.['required']" >
+                    <p>Username is required</p>
+                </div>
+                <div class="error-box" *ngIf="form.get('username')?.errors?.['minlength']">
+                    <p>Username must be at least 5 characters long</p>
+                </div>
+            </ng-container>
+           
+            <ng-container>
+            <label for="password">Password:</label>
+            <input formControlName="password" type="password" id="password" placeholder="******" name="password">
+           
+            <ng-container  *ngIf="form.get('password')?.touched">
+                <div class="error-box" *ngIf="form.get('password')?.errors?.['required']">
+                    <p>Password is required</p>
+                </div>
+                <div class="error-box" *ngIf="form.get('password')?.errors?.['minlength']">
+                    <p>Password must be at least 5 characters long</p>
+                </div>
+            </ng-container>
+          
+            <label for="repeat-password">Repeat Password:</label>
+            <input formControlName="rePassword"  type="password" id="repeat-password"    placeholder="******" name="rePassword">
+          
+            <ng-container class="error-box" *ngIf="form.get('rePassword')?.touched" >
+                <div *ngIf="form.get('rePassword')?.errors?.['required']">
+                    <p>repeat-password is required</p>
+                </div>
+                <div class="error-box" *ngIf="form.get('rePassword')?.errors?.['passwordGroupValidator'] && form.get('rePassword')?.get('rePassword')?.touched">
+                    <p>dont match</p>
+                </div>
+            </ng-container>
+            </ng-container>
+            <article class="register-page-button">
+                <button class="btn-register" [disabled]="form.invalid">Register</button>
+            </article>
+
+            <article class="account">
+                <p>Already have an account? <a href="/users/login">Sign in</a></p>
+            </article>
+
+        </form>
+
+        <article class="register-page-image">
+            <!-- Do not forget to change the path to the image -->
+            <img src="../../../assets/logo.jpg" alt="image">
+        </article>
+    </article>
+
+</section>

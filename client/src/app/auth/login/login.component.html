@@ -1,0 +1,49 @@
+<div class="box">
+  
+<section id="login-page">
+
+    <article class="login-page-container">
+
+        <form #form="ngForm" class="login-page-form" (ngSubmit)="loginHandler(form)">
+            <h2>Login</h2>
+            <p>Welcome, see the new courses!</p>
+      
+            <label for="username">Username</label>
+            <input #usernameInput="ngModel" type="text" required ngModel id="username" minlength="5" placeholder="Usernsme" name="username">
+        
+            <ng-container *ngIf="usernameInput.touched">
+                <div class="error-box" *ngIf="usernameInput.errors?.['required']">
+                    <p>Username is required</p>
+                </div>
+                <div class="error-box" *ngIf="usernameInput.errors?.['minlength']">
+                    <p>Username must be at least 5 characters long</p>
+                </div>
+            </ng-container>
+            <label for="password">Password:</label>
+            <input #passwordInput="ngModel" type="password" ngModel required id="password" minlength="5" placeholder="******" name="password">
+
+            <ng-container *ngIf="passwordInput.touched">
+                <div class="error-box" *ngIf="passwordInput.errors?.['required']">
+                    <p>Username is required</p>
+                </div>
+                <div class="error-box" *ngIf="passwordInput.errors?.['minlength']">
+                    <p>Username must be at least 5 characters long</p>
+                </div>
+            </ng-container>
+            <article class="login-page-button">
+                <button [disabled]="form.invalid">Login</button>
+            </article>
+
+            <article class="no-account">
+                <p>Don't have an account? <a href="/auth/register">Sign up</a></p>
+            </article>
+        </form>
+
+        <article class="login-page-image">
+            <!-- Do not forget to change the path to the image -->
+            <img src="../../../assets/logo.jpg" alt="job-image">
+        </article>
+    </article>
+
+</section>
+</div>

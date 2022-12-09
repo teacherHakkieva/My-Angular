@@ -1,0 +1,36 @@
+<section id="home-page">
+
+    <article class="home-page-content">
+        <h1>Find The Course That Fits Your Life</h1>
+        <p>On this site, you can find hundreds of courses offers, do not hesitate, and apply now.</p>
+
+        <a href="/courses" class="view-all-ads">View all courses</a>
+    </article>
+    
+</section>
+
+<section class="intro">
+    <article class="intro-left-side">
+        <article class="intro-left-side-image">
+            <!-- Do not forget to change the path to the image -->
+            <img src="../../assets/chef-drawing-background.png" alt="people">
+        </article>
+        <article class="intro-left-side-text">
+            <h1>You're Looking for Courses!</h1>
+
+        </article>
+    </article>
+
+    <article class="intro-symbol">
+
+        <img src="../../assets/strip-square.png" alt="strip-square">
+    </article>
+    <div *ngIf="!courses">
+        <p class="no-ads-created">No courses...</p>
+    </div>
+  
+        <!--If not show:-->
+        <!--  <p class="no-ads-created">No courses created!</p> -->
+
+    
+</section>

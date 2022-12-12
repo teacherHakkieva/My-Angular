@@ -1,5 +1,7 @@
 import { Component} from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PageService } from '../page.service';
 
 @Component({
   selector: 'app-create-course',
@@ -8,17 +10,18 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class CreateCourseComponent  {
 
-  constructor(private fb:FormBuilder) {}
+  errors: string | undefined = undefined;
 
+  constructor( private router: Router, private  pageService: PageService) {}
 
-  form=this.fb.group({
-    title:['',[Validators.required, Validators.minLength(4)]],
-    description:['',[Validators.required, Validators.minLength(20), Validators.maxLength(50)]],
-    imageUrl:['',[Validators.required, Validators.pattern(/^https?:\/\/.+$/i)]],
-    duration:['',[Validators.required]]
-
-  })
-  createHandler(){
-    console.log(this.form.value)
+  
+  createHandler(form:NgForm){
+    this.pageService.createCourse(form.value).subscribe({
+      next:()=> this.router.navigate(['/courses']),
+      error:(err)=>{
+        this.errors=err.error.error;
+        
+      }
+    })
   }
 }

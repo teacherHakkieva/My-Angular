@@ -1,29 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ICourse } from '../../shared/interfaces/course';
 import { ApiService } from '../../api.service';
+import { PageService } from '../page.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css'],
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent {
 
-  courses: ICourse[] | null=null;
+  courses: ICourse[] | undefined
 
-  constructor(private apiService: ApiService) {}
+  constructor(private pageService: PageService) {
+    this.getAllCourses()
+  }
 
-  ngOnInit(): void {
-    this.apiService.loadCourses().subscribe({
-      next: (value) => {
-        this.courses=value;
-       
-        
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+  getAllCourses(){
+    this.courses=undefined;
+    this.pageService.getAllCourses().subscribe((courses)=> this.courses=courses)
   }
  
 }

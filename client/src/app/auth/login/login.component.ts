@@ -17,9 +17,7 @@ export class LoginComponent {
 
   errors: string | undefined = undefined;
   loginHandler(form: NgForm): void{
-    console.log(form.value);
-    
-      this.authService.login(form.value).subscribe({
+     this.authService.login(form.value).subscribe({
         next: () => this.router.navigate(['/']),
         error: (err) => {
           this.errors = err.error.error

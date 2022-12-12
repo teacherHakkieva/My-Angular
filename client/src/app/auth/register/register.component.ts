@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import {passwordGroupValidator,passwordValidator} from 'src/app/shared/validator';
+import { Router } from '@angular/router';
+import {passwordValidator} from 'src/app/shared/validator';
 import { AuthService } from '../auth.service';
 
 @Component({

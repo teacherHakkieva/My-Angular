@@ -15,15 +15,7 @@ export class HomeComponent {
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-  //  this.apiService.loadHomeCourses(3).subscribe({
-  //    next: (value) => {
-  //      this.courses=value;
-  //    },
-  //    error: (err) => {
-  //      console.log(err);
-  //    },
-      
-  //  })
+   
   }
 
 }

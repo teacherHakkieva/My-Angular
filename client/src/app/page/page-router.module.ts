@@ -32,7 +32,7 @@ const router: Routes = [
      
       
       {
-        path: 'courses/:id/edit',
+        path: 'courses/:id',
         component: EditComponent,
       }, 
       

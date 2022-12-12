@@ -31,9 +31,7 @@ export class AuthService {
     )
   }
 
-  login(data: {}) {
-    console.log(data);
-    
+  login(data: {}) {    
     return this.http.post<IUser>(`${apiURL}/users/login`, data).pipe(
       tap((user) => {
         this.user = user;

@@ -16,7 +16,7 @@ export class CreateCourseComponent  {
 
   
   createHandler(form:NgForm){
-    this.pageService.createCourse(form.value).subscribe({
+    this.pageService.addCourse(form.value).subscribe({
       next:()=> this.router.navigate(['/courses']),
       error:(err)=>{
         this.errors=err.error.error;

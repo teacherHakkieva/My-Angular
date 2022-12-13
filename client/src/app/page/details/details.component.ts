@@ -26,31 +26,34 @@ export class DetailsComponent {
    this.getCourse()
   }
   
+  
   getCourse():void{
+    
     this.course = undefined;
     const id= this.actvatedRoute.snapshot.params['id']; 
     this.pageService.getCourse(id).subscribe({
       
       next: (course) =>{
-        this.course=course
-        if(this.authService.user?._id==course.owner._id){
+        this.course = course
+ 
+        if(this.authService.user?._id == (course.owner).toString()){
           this.isAuthor = true
-        }else{
-          this.isAuthor = false
+        }else {
+          this.isAuthor = false;
         }
       },
-
       error:(err)=>{
         this.errors=err.console.error?.error;
-        console.log(err);
-        
-        
+        console.log(err); 
       }
     })
   }
-
+  
   delete(){
-    const id=this.course?._id;
+   
+    this.course = undefined;
+    const id= this.actvatedRoute.snapshot.params['id']; 
+    
     this.pageService.deleteCourse(id).subscribe({
       next:()=>this.router.navigate(['/courses']),
       error:(error)=>console.log(error)  

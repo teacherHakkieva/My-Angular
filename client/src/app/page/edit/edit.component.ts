@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, NgForm, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserRoutingModule } from 'src/app/auth/user-router.module';
 import { ICourse } from 'src/app/shared/interfaces/course';
 import { IUser } from 'src/app/shared/interfaces/user';
+import { PageService } from '../page.service';
 
 @Component({
   selector: 'app-edit',
@@ -15,23 +16,31 @@ import { IUser } from 'src/app/shared/interfaces/user';
 export class EditComponent  {
   course: ICourse | undefined;
   user: IUser |undefined;
-  constructor(private actvatedRoute: ActivatedRoute, private apiService: ApiService, private authService:AuthService, private router:Router, private fb:FormBuilder) { 
+  token: string | null = localStorage.getItem('token')
+  errors: Object | undefined
+  constructor(private actvatedRoute: ActivatedRoute, private pageService: PageService, private authService:AuthService, private router:Router, private fb:FormBuilder) { 
   
-     
+  
    }
 
-   
 
 
-   form=this.fb.group({
-     title:['',[Validators.required, Validators.minLength(4)]],
-     description:['',[Validators.required, Validators.minLength(20), Validators.maxLength(50)]],
-     imageUrl:['',[Validators.required, Validators.pattern(/^https?:\/\/.+$/i)]],
-     duration:['',[Validators.required]]
  
-   })
-   editHandler(){
-     console.log(this.form.value)
+   editHandler(form:NgForm){
+    if(this.authService.user?._id != this.course?.owner._id || !this.token){
+      this.router.navigate(['**'])
+    }
+    const data=form.value
+    const id = this.course?._id;
+    this.pageService.editCourse(id, data).subscribe({
+      next: (course) => {
+        this.course = course
+       
+      },
+      error: (err) => {
+        this.errors = err.error?.error
+      }
+    })
    }
 
 }

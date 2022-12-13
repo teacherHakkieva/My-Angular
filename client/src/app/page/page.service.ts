@@ -14,7 +14,7 @@ course: null |ICourse | undefined
 
   constructor(private http: HttpClient) { }
 
-  createCourse(data:{}){
+  addCourse(data:{}){
     return this.http.post<ICourse>(`${apiURL}/courses`, data,{withCredentials: true})
   }
   getAllCourses(){

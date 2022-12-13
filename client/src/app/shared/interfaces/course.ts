@@ -7,6 +7,7 @@ export interface ICourse {
   imageUrl: string;
   duration: string;
   createdAt: string;
-  owner: IUser;
+  owner:IUser;
   userCount: number;
+  accessToken : string;
 }

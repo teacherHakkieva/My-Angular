@@ -1,12 +1,16 @@
-const { Schema, model, default: mongoose } = require("mongoose");
+const bcrypt = require('bcrypt')
+const mongoose = require("mongoose");
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
   username: {type: String,required: true,unique: true},
-  hashedPassword: {
+  password: {
     required: true,
     type: String,
 },
-  courses:[{type:mongoose.Types.ObjectId, ref: 'Course'}]
+enrolledCourses:[
+  {type: mongoose.Types.ObjectId, ref:'Course'}
+],
+myCourse:[{ type: mongoose.Types.ObjectId, ref: 'Course'}]
 });
  
 userSchema.index({username:1},
@@ -17,6 +21,13 @@ userSchema.index({username:1},
     }
   }
   )
+  userSchema.pre('save', function(next){
+    bcrypt.hash(this.password,10)
+    .then((hash)=>{
+      this.password=hash
+      return next()
+    })
+  })
 
 const User = new mongoose.model("User", userSchema);
 

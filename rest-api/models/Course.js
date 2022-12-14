@@ -1,8 +1,8 @@
-const { Schema, model, Types } = require("mongoose");
+const mongoose= require("mongoose");
 
 const URLPATTARN = /^https?:\/\/.+$/i;
 
-const courseSchema = new Schema({
+const courseSchema = new mongoose.Schema({
   title: { type: String,
    required: true,
    minlength: [4, "Course title must be at least 4 characters long"],
@@ -23,11 +23,13 @@ const courseSchema = new Schema({
   },
   duration: { type: String, required: [true, "Duration is required"] },
   createdAt: { type: String, required: true , default:()=>(new Date()).toISOString().slice(0,10)},
-  users: { type: [Types.ObjectId], ref: "User", default: [] },
-  owner:{type: Types.ObjectId, ref: "User", require: true },
+  userCount: {type: Number, default: 0},
+  owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User',required: true},
+
+//{type: Types.ObjectId, ref: "User", require: true },
 });
 
 
-const Course = model('Course', courseSchema);
+const Course = new mongoose.model('Course', courseSchema);
 
 module.exports=Course;

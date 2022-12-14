@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../api.service';
 import { ICourse } from '../../shared/interfaces/course';
+import { PageService } from '../page.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,12 +11,17 @@ import { ICourse } from '../../shared/interfaces/course';
 })
 
 export class HomeComponent {
-  courses: ICourse[] | null=null;
+  courses: ICourse[] | undefined
 
-  constructor(private apiService: ApiService) { }
+  constructor(private pageService: PageService,private router:Router) {
+    this.getLastCourse()
+   }
 
-  ngOnInit(): void {
-   
+    getLastCourse(){
+    this.pageService.getReacent().subscribe({
+      next:(courses)=>this.courses=courses,
+     error:(err)=>console.log(err)
+      
+    })
   }
-
 }

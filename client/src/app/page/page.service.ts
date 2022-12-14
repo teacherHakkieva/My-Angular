@@ -13,10 +13,14 @@ export class PageService {
 course: null |ICourse | undefined
 
   constructor(private http: HttpClient) { }
-
+  
+  getReacent(){
+    return this.http.get<ICourse[]>(`${apiURL}/`)
+  }
   addCourse(data:{}){
     return this.http.post<ICourse>(`${apiURL}/courses`, data,{withCredentials: true})
   }
+  
   getAllCourses(){
     return this.http.get<ICourse[]>(`${apiURL}/courses`)
   }
@@ -29,8 +33,6 @@ course: null |ICourse | undefined
   deleteCourse(id: string|undefined){
     return this.http.delete<ICourse>(`${apiURL}/courses/${id}`)
   }
-  getLast3(){
-    return this.http.get<ICourse[]>(`${apiURL}/`)
-  }
+
 
 }

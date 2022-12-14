@@ -13,7 +13,7 @@ export class CoursesComponent {
 
   courses: ICourse[] | undefined
 
-  constructor(private pageService: PageService) {
+  constructor(private pageService: PageService, private router:Router) {
     this.getAllCourses()
   }
 

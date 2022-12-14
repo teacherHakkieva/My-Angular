@@ -14,27 +14,51 @@ const router: Routes = [
      {
         path: 'search',
         component: SearchComponent,
+        canActivate:[AuthActivate],
+        data:{
+          loginRequired:true
+        }
          }, 
       {
         path: 'courses',
         component: CoursesComponent,
-
+        canActivate:[AuthActivate],
+        data:{
+          loginRequired:true
+        }
+        
       },   
       {
         path: 'courses/:id',
         component: DetailsComponent,
-      
+        canActivate:[AuthActivate],
+        data:{
+          loginRequired:true
+        }
+        
       },
       {
         path: 'create',
         component: CreateCourseComponent,
+        canActivate:[AuthActivate],
+        data:{
+          loginRequired:true
+        }
+        
       }, 
      
       
       {
         path: 'courses/:id',
         component: EditComponent,
+        canActivate:[AuthActivate],
+        data:{
+          loginRequired:true
+        }
+        
       }, 
+    
+     
       
 {
         path: '',

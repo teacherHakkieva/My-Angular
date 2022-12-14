@@ -40,7 +40,15 @@ export class AuthService {
       })
     )
   }
-  logout() {
+  profile(){
+    return this.http.get<IUser>(`${apiURL}/users/profile/`).pipe(
+      tap((user) => {
+        if(user){
+          this.user = user;
+        }
+      })
+    )
+  } logout() {
     this.user = null;
     return localStorage.removeItem('token');
   }

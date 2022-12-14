@@ -6,7 +6,7 @@
 
         <a href="/courses" class="view-all-ads">View all courses</a>
     </article>
-    
+
 </section>
 
 <section class="intro">
@@ -25,24 +25,27 @@
 
         <img src="../../assets/strip-square.png" alt="strip-square">
     </article>
-    <div >
-        <p class="no-ads-created">No courses...</p>
-    </div>
-    <article class="intro-right-side">
+
+    <article class="intro-right-side" *ngIf="courses">
         <!--If there show them (max 3)-->
-        <article class="intro-right-side-content">
+        <article class="intro-right-side-content" *ngFor="let course of courses">
             <!-- Do not forget to change the path to the image -->
-            <img src="../../assets/technology.png" alt="technology">
+            <h3>{{course.title}}</h3>      
             <h5>
-                <!--Put the value of the headline below-->
-        
-                <!--Put the value of the total number of candidates below-->
-                <span>bbb</span>
+                <span>{{course.duration}}</span>              
+             
+                <span>{{course.createdAt}}</span>
+    
+                
             </h5>
         </article>
-
-        <!--If not show:-->
-        <!--  <p class="no-ads-created">No courses created!</p> -->
-
+    
     </article>
+    
+    
+    <div *ngIf="!courses">
+        <p class="no-ads-created">No courses...</p>
+    </div>
+    
+  
 </section>

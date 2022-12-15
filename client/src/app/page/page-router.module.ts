@@ -49,7 +49,7 @@ const router: Routes = [
      
       
       {
-        path: 'courses/:id',
+        path: 'courses/edit/:id',
         component: EditComponent,
         canActivate:[AuthActivate],
         data:{

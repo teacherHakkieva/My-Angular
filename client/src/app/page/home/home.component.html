@@ -30,11 +30,12 @@
         <!--If there show them (max 3)-->
         <article class="intro-right-side-content" *ngFor="let course of courses">
             <!-- Do not forget to change the path to the image -->
-            <h3>{{course.title}}</h3>      
+            <img src="{{course.imageUrl}}" alt="job-icon">
+
             <h5>
-                <span>{{course.duration}}</span>              
+                <span>{{course.title}}</span>              
              
-                <span>{{course.createdAt}}</span>
+                <span>{{course.duration}}</span>
     
                 
             </h5>

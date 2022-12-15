@@ -1,34 +1,116 @@
-<section id="details-page">
-    <article class="details-gage-title">
-        <h1>Details Page</h1>
-    </article>
-    <article class="details-page-card" *ngIf="course">
-
-        <article class="details-page-card-image">
-            <!-- Do not forget to change the path to the image -->
-            <img src="{{course.imageUrl}}" alt="details-image">
+<ng-container *ngIf="!editMode">
+    <section id="details-page">
+        <article class="details-gage-title">
+            <h1>Details Page</h1>
         </article>
+        <article class="details-page-card" *ngIf="course">
 
-        <article class="details-page-card-content">
-    
-            <h2>Title : {{course.title}}</h2>
-            <h3>Duration: {{course.duration}}</h3>
-            <h4>Description: {{course.description}}</h4>
-            
-
-            <article class="details-page-card-buttons">
-                <!--only for registered users and author of the ad-->
-                <ng-container *ngIf="isAuthor">
-                <a routerLink='edit' class="btn-edit">Edit</a>
-                <a (click)="delete()" class="btn-delete">Delete</a>
-                        </ng-container>
-                        <ng-container *ngIf="!isAuthor">
-                <!--logged in user who did not apply for current ad-->
-                <a href="#" class="btn-apply">Enroll</a>
-                <p class="applied-people">You are already enrolled</p>
-                        </ng-container>
+            <article class="details-page-card-image">
+                <!-- Do not forget to change the path to the image -->
+                <img src="{{course.imageUrl}}" alt="details-image">
             </article>
+
+            <article class="details-page-card-content">
+
+                <h2>Title : {{course.title}}</h2>
+                <h3>Duration: {{course.duration}}</h3>
+                <h4>Description: {{course.description}}</h4>
+
+
+                <article class="details-page-card-buttons">
+                    <!--only for registered users and author of the ad-->
+                    <ng-container *ngIf="isAuthor">
+                        <a (click)="editMode = true" class="btn-edit">Edit</a>
+                        <a (click)="delete()" class="btn-delete">Delete</a>
+                    </ng-container>
+                    <ng-container *ngIf="!isAuthor">
+                        <!--logged in user who did not apply for current ad-->
+                        <ng-container *ngIf="!enrolled" >
+                            <a  (click)="addEnroll()" class="btn-apply">Enroll</a>
+                        </ng-container>
+                        
+                            <p *ngIf="enrolled" class="applied-people">You are already enrolled</p>
+                
+                </ng-container>
+
+                </article>
+            </article>
+
+        </article>
+    </section>
+</ng-container>
+<ng-container *ngIf="editMode">
+
+    <section id="register-page">
+        <article class="register-page-container">
+            <form #form="ngForm" class="register-page-form" (ngSubmit)="editCourse(form)">
+                <h2>Create Course</h2>
+
+                <label for="title">Title</label>
+                <input #title="ngModel" type="text" class="form-control" [ngModel]="course?.title" required
+                    minlength="4" placeholder="Course title" name="title" value="">
+
+                <ng-container *ngIf="title.touched">
+                    <div class="error-box" *ngIf="title.errors?.['required']">
+                        <p>Course title is required </p>
+                    </div>
+                    <div class="error-box" *ngIf="title.errors?.['minlength']">
+                        <p>Course title must be at least 4 characters long </p>
+                    </div>
+                </ng-container>
+
+                <label for="description">Description</label>
+                <input #description="ngModel" [ngModel]="course?.description" required minlength="20" maxlength="50"
+                    type="text" class="form-control" placeholder="Description" name="description">
+
+                <ng-container *ngIf="description.touched">
+                    <div class="error-box" *ngIf="description.errors?.['required']">
+                        <p>Course description is required </p>
+                    </div>
+                    <div class="error-box" *ngIf="description.errors?.['minlength']">
+                        <p>Course description must be at least 20 characters long </p>
+                    </div>
+                    <div class="error-box" *ngIf="description.errors?.['maxlength']">
+                        <p>Course description must be at most 50 characters long</p>
+                    </div>
+                </ng-container>
+
+                <label for="imageUrl">Image url</label>
+                <input #imageUrl="ngModel" type="text" class="form-control" pattern="^https?:\/\/.+$"
+                    placeholder="Image Url" [ngModel]="course?.imageUrl" required name="imageUrl" value="">
+
+                <ng-container *ngIf="imageUrl.touched">
+                    <div class="error-box" *ngIf="imageUrl.errors?.['required']">
+                        <p>Course Url image is required </p>
+                    </div>
+                    <div class="error-box" *ngIf="imageUrl.errors?.['pattern']">
+                        <p>Invalid URL</p>
+                    </div>
+                </ng-container>
+
+
+
+                <label for="duration">Duration</label>
+                <input #duration="ngModel" type="text" class="form-control" [ngModel]="course?.duration" required
+                    placeholder="4 weeks" name="duration" value="">
+
+                <ng-container *ngIf="duration.touched">
+                    <div class="error-box" *ngIf="duration.errors?.['required']">
+                        <p>Duration is required</p>
+                    </div>
+
+                </ng-container>
+
+                <article class="register-page-button">
+                    <button class="btn-create">Create</button>
+                </article>
+
+
+
+            </form>
+
+
         </article>
 
-    </article>
-</section>
+    </section>
+</ng-container>

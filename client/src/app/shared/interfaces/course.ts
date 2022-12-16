@@ -8,6 +8,7 @@ export interface ICourse {
   duration: string;
   createdAt: string;
   owner:IUser;
+  enrolledUser:IUser[];
   userCount: number;
   accessToken : string;
 }

@@ -19,9 +19,6 @@
                     <a routerLink="create" class="header-nav-list-item-link">Create Course</a>
                 </li>
                 <li class="header-nav-list-item">
-                    <a routerLink="/search" class="header-nav-list-item-link">Search</a>
-                </li>
-                <li class="header-nav-list-item">
                     <a routerLink="/auth/profile" class="header-nav-list-item-link">Profile</a>
                 </li>
                 <li class="header-nav-list-item">
@@ -33,7 +30,7 @@
             <ng-template [ngIf]="!isLoggedIn">
 
                 <li class="header-nav-list-item">
-                    <a routerLink="/auth/register" class="header-nav-list-item-link">Register</a>
+                    <a routerLink="/auth/register/" class="header-nav-list-item-link">Register</a>
                 </li>
                 <li class="header-nav-list-item">
                     <a routerLink="/auth/login" class="header-nav-list-item-link">Login</a>

@@ -3,7 +3,7 @@
     display: flex;
     height: 230px;
     position: relative;
-    margin-bottom: 5em;
+    margin-bottom: 0em;
     background: linear-gradient(90deg,rgb(234, 40, 115) 0%, rgb(255, 97, 88) 50%, rgb(55, 35, 84) 50%, rgb(55, 35, 84) 100%);
 }
 
@@ -11,7 +11,7 @@
     width: 50%;
     display: flex;
     padding-top: 35px;
-    padding-left: 60px;
+   
 }
 
 .intro-left-side-image>img {
@@ -99,13 +99,13 @@
 #home-page {
     margin: 0;
     padding: 0;
-    height: 400px;
+    height: 350px;
     text-align: center;
-    display: flex;
+    display:flex;
 }
 
 .home-page-content {
-    margin-left: 26em;
+    margin-left: 16em;
 }
 
 .home-page-content>h1 {

@@ -1,8 +1,8 @@
 <section id="home-page">
 
     <article class="home-page-content">
-        <h1>Find The Course That Fits Your Life</h1>
-        <p>On this site, you can find hundreds of courses offers, do not hesitate, and apply now.</p>
+        <h1>Find The Cooking Course That Fits Your Life</h1>
+        <p>On this site, you can find hundreds of cooking courses offers, do not hesitate, and enroll now.</p>
 
         <a href="/courses" class="view-all-ads">View all courses</a>
     </article>
@@ -16,16 +16,14 @@
             <img src="../../assets/chef-drawing-background.png" alt="people">
         </article>
         <article class="intro-left-side-text">
-            <h1>You're Looking for Courses!</h1>
+            <h1>You're Looking for Last Courses!</h1>
 
         </article>
     </article>
-
     <article class="intro-symbol">
 
         <img src="../../assets/strip-square.png" alt="strip-square">
     </article>
-
     <article class="intro-right-side" *ngIf="courses">
         <!--If there show them (max 3)-->
         <article class="intro-right-side-content" *ngFor="let course of courses">
@@ -42,8 +40,6 @@
         </article>
     
     </article>
-    
-    
     <div *ngIf="!courses">
         <p class="no-ads-created">No courses...</p>
     </div>

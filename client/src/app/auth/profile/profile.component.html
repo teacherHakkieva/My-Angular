@@ -1,21 +1,20 @@
-
-
 <section id="viewhotelDetails">
-   
-    <div class="profile"><img src="../../../assets/logo.png" alt="default user" >
+
+    <div class="profile"><img src="../../../assets/logo.png" alt="default user">
         <h3>User Info:</h3>
         <div class="flex">
             <p>Username:</p>
-            <p>{{user?.username}}</p>
+            <p>{{userProfile?.username}}</p>
         </div>
         <div class="flex">
-            <p>My courses: </p>
-            <p>
-                
-                <span>Sushi, </span>
-                <span>Italian cooking, </span>
-                <span>Pizza </span>
-            </p>
+            <p>My courses:</p>
+                <div [innerText]="myCoursesString"></div>
+        </div>
+        <div class="flex">
+            <p>My enrolled courses:</p>              
+                <div [innerText]="myEnrolledCourses"></div>
+    
         </div>
     </div>
+
 </section>

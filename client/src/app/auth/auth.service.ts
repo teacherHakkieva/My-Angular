@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../shared/interfaces/user';
+import { ICourse } from '../shared/interfaces/course';
 
 const apiURL = environment.apiURL;
 
@@ -11,6 +12,7 @@ const apiURL = environment.apiURL;
 })
 export class AuthService {
   user: null | IUser | undefined;
+  course: null|ICourse| undefined;
   
   constructor(private http: HttpClient) {}
 
@@ -41,14 +43,11 @@ export class AuthService {
     )
   }
   profile(){
-    return this.http.get<IUser>(`${apiURL}/users/profile/`).pipe(
-      tap((user) => {
-        if(user){
-          this.user = user;
-        }
-      })
-    )
-  } logout() {
+    return this.http.get<ICourse[]>(`${apiURL}/courses`, {withCredentials: true})
+  
+  } 
+  
+  logout() {
     this.user = null;
     return localStorage.removeItem('token');
   }

@@ -44,7 +44,7 @@
     <section id="register-page">
         <article class="register-page-container">
             <form #form="ngForm" class="register-page-form" (ngSubmit)="editCourse(form)">
-                <h2>Create Course</h2>
+                <h2>Edit Course</h2>
 
                 <label for="title">Title</label>
                 <input #title="ngModel" type="text" class="form-control" [ngModel]="course?.title" required
@@ -102,7 +102,7 @@
                 </ng-container>
 
                 <article class="register-page-button">
-                    <button class="btn-create">Create</button>
+                    <button class="btn-create">Edit</button>
                 </article>
 
 

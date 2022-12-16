@@ -24,6 +24,7 @@ const courseSchema = new mongoose.Schema({
   duration: { type: String, required: [true, "Duration is required"] },
   createdAt: { type: String, required: true , default:()=>(new Date()).toISOString().slice(0,10)},
   userCount: {type: Number, default: 0},
+  enrolledUser:[{type:mongoose.Schema.Types.ObjectId,ref:'User'}],
   owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User',required: true},
 
 //{type: Types.ObjectId, ref: "User", require: true },

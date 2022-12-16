@@ -17,9 +17,11 @@ const {
   updateCourse,
   enrollUser,
   decode,
+  addEnroll,
 } = require("../services/courseService");
 const { body } = require("express-validator");
 const { default: jwtDecode } = require("jwt-decode");
+
 
 courseController.post("/", async (req, res) => {
   const data = req.body;
@@ -27,8 +29,6 @@ courseController.post("/", async (req, res) => {
 
   try {
     data.owner = decode;
-    console.log(data.owner);
-
     const course = await addCourse(data);
     updateCoursesOnUser(decode, course._id);
 
@@ -53,14 +53,28 @@ courseController.get("/:id", async (req, res) => {
   const course = await getById(id);
   res.status(200).json(course);
 });
-courseController.put("/:id", async (req, res, next) => {
+
+courseController.get("/enroll/:id", async (req, res) => {
+  try {
+    const userId = jwtDecode(req.user.token)._id;
+    const courseId = req.params.id;
+    await addEnroll(userId, courseId);
+    res.status(200).json("Success");
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+courseController.put("/:id", async (req, res) => {
+  const userId = jwtDecode(req.user.token)._id;
+  
   const id = req.params.id;
   const data = req.body;
-  const course = await getCourse(id);
+  const course = await getById(id);
   try {
-    if (req.user._id == course.owner._id) {
+    if (userId == course.owner._id) {
       await updateCourse(id, data);
-      const updatedCourse = await getCourse(id);
+      const updatedCourse = await getById(id);
       res.status(200).json(updatedCourse);
     } else {
       throw new Error("you are not owner");
@@ -68,7 +82,7 @@ courseController.put("/:id", async (req, res, next) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-  
+  res.end();
 });
 
 courseController.delete("/:id", async (req, res) => {

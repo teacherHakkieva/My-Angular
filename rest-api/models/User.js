@@ -12,7 +12,7 @@ enrolledCourses:[
 ],
 myCourse:[{ type: mongoose.Types.ObjectId, ref: 'Course'}]
 });
- 
+  
 userSchema.index({username:1},
   {
     collation: {

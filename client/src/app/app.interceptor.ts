@@ -5,7 +5,11 @@ import { Token } from "@angular/compiler";
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
+<<<<<<< HEAD
         token: string | null = null
+=======
+     token: string | null = null
+>>>>>>> 826216d70d73e520d2361c5902f35e6f7c6c19a1
         intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
             this.token = localStorage.getItem('token')
             if(this.token){
@@ -14,8 +18,13 @@ export class AppInterceptor implements HttpInterceptor {
                 return next.handle(req.clone())
             }
         }
+<<<<<<< HEAD
     
     }
+=======
+
+}
+>>>>>>> 826216d70d73e520d2361c5902f35e6f7c6c19a1
 export const appInterceptorProvider: Provider = {
     provide: HTTP_INTERCEPTORS,
     useClass: AppInterceptor,

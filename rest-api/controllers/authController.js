@@ -6,22 +6,22 @@ const { parseError } = require("../util/parser");
 
 
 
-//authController.get("/", async (req, res) => {
- // const user = req.user;
- // console.log(user);
+authController.get("/", async (req, res) => {
+  const user = req.user;
+  console.log(user);
 
-//  if (user) {
- //   res.status(200).json(user);
- // }
-//});
+ if (user) {
+   res.status(200).json(user);
+  }
+});
 
 authController.post("/register", async (req, res) => {
   try {
-    const token = await register(req.body.username, req.body.password);
-    res.status(201).json(token);
+    const user = await register(req.body.username, req.body.password);
+    res.status(201).json(user);
   } catch (error) {
-    const message = parseError(error);
-    res.status(400).json({ message });
+    console.log(error)
+    res.status(400).json({error:error.message})
   }
   res.end();
 });
@@ -29,13 +29,13 @@ authController.post("/register", async (req, res) => {
 authController.post("/login", async (req, res) => {
   try {
     const user = await login(req.body.username, req.body.password);
-    const userId = JSON.stringify(user._id);
+   // const userId = JSON.stringify(user._id);
     console.log(user);
 
     res.status(201).json(user);
   } catch (error) {
-    const message = parseError(error);
-    res.status(404).json({ message });
+    console.log(error)
+    res.status(400).json({error:error.message})
   }
   res.end();
 });
@@ -52,8 +52,7 @@ authController.get("/profie", async (req, res) => {
    
 
 authController.get("/logout", async (req, res) => {
-  const token = req.token;
-  await logout(token);
+console.log(req.user);
   res.status(204).end();
 });
 

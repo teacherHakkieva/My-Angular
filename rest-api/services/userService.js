@@ -10,11 +10,10 @@ const createToken = (user) => {
     _id: user._id,
     username: user.username,
   };
-  const accessToken = jwt.sign(payload, environment.JST_SECRET);
   return {
     _id: user._id,
     username: user.username,
-    accessToken,
+    accessToken: jwt.sign(payload, environment.JST_SECRET),
   };
 };
 

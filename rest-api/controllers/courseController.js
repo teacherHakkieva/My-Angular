@@ -5,7 +5,7 @@ const {
   updateCoursesOnUser,
 } = require("../services/userService");
 const mongoose = require("mongoose");
-const { User } = require("../models/User");
+const User  = require("../models/User");
 const {
   addCourse,
   getAllCourses,
@@ -25,13 +25,14 @@ const { default: jwtDecode } = require("jwt-decode");
 
 courseController.post("/", async (req, res) => {
   const data = req.body;
-  const decode = jwtDecode(req.user.token)._id;
+  const id=req.user.token
+  const userId = jwtDecode(req.user.token)._id;
 
+  console.log(userId);
   try {
-    data.owner = decode;
+    data.owner = userId;
     const course = await addCourse(data);
-    updateCoursesOnUser(decode, course._id);
-
+    updateCoursesOnUser(userId, course._id);
     res.status(201).json(course);
   } catch (error) {
     res.status(400).json({ error: error.message });

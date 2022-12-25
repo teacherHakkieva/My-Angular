@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { errorServer} from 'src/app/shared/validator';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,9 @@ export class LoginComponent {
   errors: string | undefined = undefined;
   loginHandler(form: NgForm): void{
      this.authService.login(form.value).subscribe({
-        next: () => this.router.navigate(['/']),
+        next: () => this.router.navigate(['/courses']),
         error: (err) => {
-          this.errors = err.error.error
+             this.errors = errorServer(err.error.error)
         }
       })
     }

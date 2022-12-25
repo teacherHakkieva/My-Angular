@@ -5,16 +5,17 @@ import { Token } from "@angular/compiler";
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
-    token: string | null  = localStorage.getItem('token')
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if(this.token){
-            return next.handle(req.clone({ setHeaders: { 'X-Authorization': this.token}}));
-        }else{
-            return next.handle(req.clone())
+        token: string | null = null
+        intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+            this.token = localStorage.getItem('token')
+            if(this.token){
+                return next.handle(req.clone({ setHeaders: { 'X-Authorization': this.token}}));
+            }else{
+                return next.handle(req.clone())
+            }
         }
+    
     }
-
-}
 export const appInterceptorProvider: Provider = {
     provide: HTTP_INTERCEPTORS,
     useClass: AppInterceptor,

@@ -15,6 +15,8 @@ export class ProfileComponent {
   token: string | null = localStorage.getItem('token');
   myCoursesString!: string;
   myEnrolledCourses!: string;
+  hasCourses: boolean = false;
+  hasEnrolled: boolean = false;
   constructor(
     private authService: AuthService,
     private actvatedRoute: ActivatedRoute
@@ -45,7 +47,9 @@ export class ProfileComponent {
           }
         }
         this.myCoursesString = myCourses.join(', ');
-
+        if (this.myCoursesString.length>0) {
+          this.hasCourses=true;
+        }
         const allEnroll = [];
         const allEnrolled = course.map(({ title, enrolledUser }) => ({[title]: enrolledUser}));
         for (const el of allEnrolled) {
@@ -58,6 +62,9 @@ export class ProfileComponent {
           }
         }
         this.myEnrolledCourses=allEnroll.join(', ')
+      if (this.myEnrolledCourses.length>0) {
+        this.hasEnrolled=true;
+      }
       },
     });
   }

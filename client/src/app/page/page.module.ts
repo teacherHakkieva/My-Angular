@@ -21,8 +21,6 @@ import { CreateCourseComponent } from './create-course/create-course.component';
   declarations: [
     HomeComponent, 
   CoursesComponent,
-  
- 
     DetailsComponent,
   CreateCourseComponent,
   EditComponent,

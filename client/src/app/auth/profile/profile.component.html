@@ -8,11 +8,15 @@
         </div>
         <div class="flex">
             <p>My courses:</p>
-                <div [innerText]="myCoursesString"></div>
+                <div *ngIf="hasCourses" [innerText]="myCoursesString"></div>
+                <div *ngIf="!hasCourses">You have no course created!</div>
+
         </div>
         <div class="flex">
             <p>My enrolled courses:</p>              
-                <div [innerText]="myEnrolledCourses"></div>
+                <div *ngIf="hasEnrolled" [innerText]="myEnrolledCourses"></div>
+                <div *ngIf="!hasEnrolled">You are not enrolled in a course!</div>
+
     
         </div>
     </div>

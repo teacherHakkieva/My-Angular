@@ -16,16 +16,16 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     RegisterComponent,
     ProfileComponent,
     LogoutComponent,
-  
+    
   ],
   imports: [
     CommonModule, 
     ReactiveFormsModule,
     FormsModule,
     UserRoutingModule,
-    
+   
     
   ],
-  exports: [LoginComponent,ProfileComponent,],
+  exports: [LoginComponent,ProfileComponent],
 })
 export class AuthModule {}

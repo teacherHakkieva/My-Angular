@@ -30,8 +30,13 @@
                     <p>Username must be at least 5 characters long</p>
                 </div>
             </ng-container>
-            <article class="login-page-button">
-                <button [disabled]="form.invalid">Login</button>
+            <ng-container *ngIf="errors">
+                <div class="error-box" >
+                    <p>{{errors}}</p>
+                </div>
+            </ng-container>
+            <article class="register-page-button">
+                <button class="btn-register" [disabled]="form.invalid">Login</button>
             </article>
 
             <article class="no-account">
